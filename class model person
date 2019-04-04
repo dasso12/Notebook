@@ -1,0 +1,28 @@
+package model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class MPerson extends MConnection{
+    
+    public Boolean insertPerson(String parameter1, String  parameter2,String  parameter3){
+
+	try{
+            PreparedStatement ps = null;
+            Connection conn = connection();
+            String query = "INSERT INTO person (attribute1, attribute2, attribute3) VALUES (?,?,?)";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, parameter1);
+            ps.setString(2, parameter2);
+            ps.setString(3, parameter3);
+            ps.execute();
+            return true;
+	} 
+        catch (SQLException ex) 
+        {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+}
