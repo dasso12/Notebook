@@ -1,0 +1,43 @@
+package controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import  view.*;
+import model.*;
+
+public class CPerson implements ActionListener{
+    private VPerson vPerson;
+    private MPerson mPerson;
+    private VMenu     vMenu;
+    private String  name;  
+    private String  fatherSurname;
+    private String  motherSurname;
+    
+    //CONTRUCTOR METHOD.
+    public   CPerson(VPerson person)
+    {
+        this.vPerson = person;
+        this.vPerson.btnInsertPerson.addActionListener(this);
+    }
+    
+    //METHOD WHOSE CONTENT ARE CLIC EVENTS.
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == vPerson.btnInsertPerson)
+        {
+            try
+            {
+                mPerson = new MPerson();
+                name = vPerson.txtPersonName.getText();
+                fatherSurname = vPerson.txtFatherSurname.getText();
+                motherSurname = vPerson.txtMotherSurname.getText();
+ 
+                mPerson.insertPerson(name, fatherSurname, motherSurname);
+            }
+            catch(Exception ex)
+            {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+}
